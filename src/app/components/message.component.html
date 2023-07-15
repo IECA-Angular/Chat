@@ -6,10 +6,10 @@
 
 <ng-template #messageLeft>
   <div class="w-full flex self-start items-end">
-    <img class="h-10 w-10 rounded-full mr-3" src="https://placehold.co/500x500" alt="Imagen de perfil">
+    <img class="h-10 w-10 rounded-full mr-3" [src]="this.profileImage" alt="Imagen de perfil">
     <div class="px-4 py-2 rounded-xl bg-white shadow-lg text-black">
-        Un texto cualquiera Un texto cualquiera Un texto cualquiera Un texto cualquiera Un texto cualquiera
-        <span class="text-gray-400 text-xs ml-2">12:30 PM</span>
+      {{ this.message }}
+      <span class="text-gray-400 text-xs ml-2">{{ this.messageDate | date : 'hh:mm a'  }}</span>
     </div>
   </div>
 </ng-template>
@@ -17,9 +17,9 @@
 <ng-template #messageRight>
   <div class="w-full flex self-end items-end justify-end">
     <div class="px-4 py-2 rounded-xl bg-blue-500 shadow-lg text-white">
-        Un texto cualquiera Un texto cualquiera Un texto cualquiera Un texto cualquiera Un texto cualquiera
-        <span class="text-gray-200 text-xs ml-2">12:30 PM</span>
+      {{ this.message }}
+      <span class="text-gray-200 text-xs ml-2">{{ this.messageDate | date : 'hh:mm a'  }}</span>
     </div>
-    <img class="h-10 w-10 rounded-full ml-3" src="https://placehold.co/500x500" alt="Imagen de perfil">
+    <img class="h-10 w-10 rounded-full ml-3" [src]="this.profileImage" alt="Imagen de perfil">
   </div>
 </ng-template>

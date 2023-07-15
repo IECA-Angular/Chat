@@ -56,12 +56,15 @@
 
   <div class="bg-white py-2 px-4 shadow-inner">
     <div class="flex">
-      <input id="chat-input" class="flex-grow p-2 rounded-l-xl border-2 border-blue-500" placeholder="Escribe un mensaje..." type="text">
-      <button class="bg-blue-500 text-white px-4 py-2 rounded-r-xl">Enviar</button>
+      <input [(ngModel)]="this.message" id="chat-input" class="flex-grow p-2 rounded-l-xl border-2 border-blue-500" placeholder="Escribe un mensaje..." type="text">
+      <button (click)="this.sendMessage()" class="bg-blue-500 text-white px-4 py-2 rounded-r-xl">Enviar</button>
     </div>
   </div> <!-- Input -->
 
 </ng-template>
+
+
+
 
 
 <div class="
@@ -76,7 +79,7 @@
   Chat
 </div> <!-- Titulo -->
 
-<ng-container *ngTemplateOutlet="profile"></ng-container>
+<ng-container *ngTemplateOutlet="this.user === null ? profile : chat"></ng-container>
 
 </div>
 </div>
