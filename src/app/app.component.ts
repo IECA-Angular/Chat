@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { IUser } from './interfaces/user.interface';
@@ -14,6 +14,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+
+  @ViewChild('chatContent') chatContent!: ElementRef;
+
   title = 'chat';
   user?: IUser | null = null;
 
@@ -28,7 +32,10 @@ export class AppComponent {
 
     this.chatMessages$ =
     collectionData(query(this.messageCollection, orderBy('date') )).pipe(tap((messages: any) => {
-      setTimeout(() => {});
+      setTimeout(() => {
+        const container = this.chatContent.nativeElement;
+        container.scrollTop = container.scrollHeight;
+      });
     })) as Observable<IMessage[]>;
 
   }
@@ -62,6 +69,13 @@ export class AppComponent {
     addDoc(this.messageCollection, newMessage)
     .then((DocumentReference: DocumentReference) => {})
     .catch((error) => {})
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if ( event.code === 'Enter' ) {
+      this.sendMessage();
+    }
   }
 
 }
